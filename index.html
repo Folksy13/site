@@ -1637,6 +1637,7 @@
             max-width: 32rem;
             max-height: 88vh;
             overflow-y: auto;
+            overscroll-behavior: contain;
             padding: 1.5rem;
             position: relative;
             animation: slideDown 0.25s ease-out;
@@ -4226,13 +4227,8 @@
                 window.spawnReactiveBurst(window.innerWidth / 2, window.innerHeight / 2, 20, hexColor, 6);
             }
 
+            document.body.style.overflow = 'hidden';
             document.getElementById('playerInfoModal').classList.add('show');
-        }
-
-        function closePlayerModal(e) {
-            if (!e || e.target.id === 'playerInfoModal' || e.target.classList.contains('modal-close-btn')) {
-                document.getElementById('playerInfoModal').classList.remove('show');
-            }
         }
 
         loadTeamMembers();
@@ -5151,8 +5147,12 @@
                 window.spawnReactiveBurst(window.innerWidth / 2, window.innerHeight / 2, 20, orgColor, 6);
             }
 
+                        // Блокируем скролл body, чтобы скроллилась только модалка
+            document.body.style.overflow = 'hidden';
+
             modal.classList.add('active');
             modal.style.display = 'flex';
+            
         }
         window.openOrgModal = openOrgModal;
         function closeOrgModal(e) {
@@ -5161,6 +5161,7 @@
             if (modal) {
                 modal.classList.remove('active');
                 modal.style.display = 'none';
+                document.body.style.overflow = '';
             }
         }
         window.closeOrgModal = closeOrgModal;
